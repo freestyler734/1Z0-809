@@ -7,7 +7,7 @@ public class B extends A {
 
     }
 
-    @Override
+   // @Override
     public void m1() {
 
     }
