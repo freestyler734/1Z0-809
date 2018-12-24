@@ -37,5 +37,28 @@ public class Example {
         System.out.println("==================");
 
         System.out.println(Season.valueOf("SPRING"));
+        System.out.println("==================");
+
+        Season summer = Season.SUMMER;
+        summer.printVisitorsStatus();
+        spring.printVisitorsStatus();
+
+        // метод valueOf - возвращает уже созданную константу enum (из своего массива),
+        // если в enum была объявлена константа с передаваемым именем(регистр важен).
+        // Поэтому в данном примере константа содержит значение visitorsStatus,
+        // она уже была создана раньше и ей было передано значение через конструктор
+        Season.valueOf("SUMMER").printVisitorsStatus();
+        System.out.println("==================");
+
+        Season winter = Season.WINTER;
+        winter.setAvgTemperature(30);
+        winter.printAvgTemperature();
+        spring.printAvgTemperature();
+        System.out.println("==================");
+
+        winter.printSmth();
+        spring.printSmth();
+
+       // winter.printSpecial();
     }
 }
