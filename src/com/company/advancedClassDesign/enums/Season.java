@@ -5,7 +5,7 @@ package com.company.advancedClassDesign.enums;
 // Cам enum(в данном случае Season) - наследник класса Enum(под капотом).
 // Под капотом, анонимные классы констант создаются в статическом блоке инициализации.
 // Т.о. enum - своеобразная реализация фабрики.
-// Поля и методы констант - как у обычных классов.
+// Поля и методы enum наследуются константами - как у обычных классов.
 public enum Season {
     SUMMER("Low") {
         @Override
@@ -33,7 +33,6 @@ public enum Season {
             System.out.println(this + " smth");
         }
 
-        int i=0;
 
         // метод не будет доступен у константы,
         // так как константы должны иметь те же и поля, что родитель (сам enum Season).
@@ -46,6 +45,12 @@ public enum Season {
         @Override
         public void printSmth() {
             System.out.println(this + " smth");
+        }
+
+        // можно переопределять toString()
+        @Override
+        public String toString() {
+            return super.toString() + "2";
         }
     }; // ; после констант можно опускать, ТОЛЬКО если после констант нет больше кода(методы, конструкторы)
 
@@ -84,4 +89,12 @@ public enum Season {
 
     // Объявляем абстрактный метод, который ВСЕ константы должны реализовать
     public abstract void printSmth();
+
+    public int i = 0;
+
+    // можно переопределять toString()
+    @Override
+    public String toString() {
+        return super.toString() + "1";
+    }
 }
