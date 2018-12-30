@@ -12,6 +12,8 @@ public class Main {
         Outer.Inner o1Inner = o1.new Inner();
         System.out.println(o1);
 
+        // такой спосиоб объявления переменной внутреннего класса доступен,
+        // т.к. мы импортировали члены класса Outer
         Inner i2 = o1.new Inner();
 
     }
