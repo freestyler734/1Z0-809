@@ -22,6 +22,9 @@ public class Main {
         //methodName = "";
         LocalClass lc = new LocalClass();
         lc.m();
+        // переменные класса не обязательно д.б. final или фактически final.
+        enclosingField = "asd";
+        //methodName = "";
         return lc;
     }
 

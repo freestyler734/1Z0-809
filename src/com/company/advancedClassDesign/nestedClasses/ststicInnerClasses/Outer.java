@@ -11,6 +11,7 @@ public class Outer {
         private int k = 3;
 
         public void method() {
+            Outer o = new Outer();
             System.out.println(age);
         }
     }

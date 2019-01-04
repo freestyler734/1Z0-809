@@ -16,5 +16,8 @@ public class Main {
         // т.к. мы импортировали члены класса Outer
         Inner i2 = o1.new Inner();
 
+        System.out.println("============================");
+        A.B.C c = new A().new B().new C();
+        c.printAllX();
     }
 }
