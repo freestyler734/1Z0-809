@@ -1,4 +1,4 @@
-package com.company.designPatternsAndPrinciples.patterns;
+package com.company.designPatternsAndPrinciples.patterns.singleton;
 
 /*
   Реализация синглтона
