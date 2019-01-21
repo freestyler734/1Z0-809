@@ -5,6 +5,7 @@ public class ParametrizedClass <T, U> {
     private T object1;
     private U object2;
 
+    ParametrizedClass(){}
 
     ParametrizedClass(T o1, U o2) {
         this.object1 = o1;
