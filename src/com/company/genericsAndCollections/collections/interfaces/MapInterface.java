@@ -48,6 +48,10 @@ public class MapInterface {
         map.replaceAll((key, value) -> value * 2);
         System.out.println(map);
 
+        System.out.println("");
+        map.forEach((k, v) -> System.out.println(k + ": " + v));
+        System.out.println("");
+
 
         /// Java 8 Map Api ///
         map.putIfAbsent("Tenth", 100);
