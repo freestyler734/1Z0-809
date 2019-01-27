@@ -1,4 +1,4 @@
-package com.company.genericsAndCollections.collections;
+package com.company.genericsAndCollections.collections.interfaces;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -41,6 +41,16 @@ public class MapInterface {
         for (String key: map.keySet()) {
             System.out.print(map.get(key)+ " ");
         }
+        System.out.println("");
 
+        /// Функциональные методы ///
+        System.out.println(map);
+        map.replaceAll((key, value) -> value * 2);
+        System.out.println(map);
+
+
+        /// Java 8 Map Api ///
+        map.putIfAbsent("Tenth", 100);
+        System.out.println(map);
     }
 }

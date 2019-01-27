@@ -1,8 +1,9 @@
-package com.company.genericsAndCollections.collections;
+package com.company.genericsAndCollections.collections.interfaces;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class ListInterface {
 
@@ -38,5 +39,13 @@ public class ListInterface {
         while (iter.hasNext()) {
             System.out.print(iter.next() + " ");
         }
+        System.out.println("\n");
+
+        /// Функциональные методы ///
+        System.out.println(list);
+        System.out.print("list.replaceAll(str -> str + \"as\"): \n");
+        list.replaceAll(str -> str + "as");
+        System.out.println(list);
+
     }
 }

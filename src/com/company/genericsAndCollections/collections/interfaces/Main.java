@@ -1,4 +1,4 @@
-package com.company.genericsAndCollections.collections;
+package com.company.genericsAndCollections.collections.interfaces;
 
 public class Main {
 

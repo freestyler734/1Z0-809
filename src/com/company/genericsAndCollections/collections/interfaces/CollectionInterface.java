@@ -1,4 +1,4 @@
-package com.company.genericsAndCollections.collections;
+package com.company.genericsAndCollections.collections.interfaces;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +35,18 @@ public class CollectionInterface {
         // Никакие исключения не выбрасываются при неудачном завершении ситуаций(кроме JVM).
         //
         // Также в интерфейсе нет методов типа get() элемент.
+
+
+        /// Функциональные методы ///
+        System.out.println(collection);
+        System.out.println("collection.removeIf(s -> s.contains(\"4\")): " + collection.removeIf(s -> s.contains("4")));
+        System.out.println(collection);
+        System.out.println("");
+
+        collection.forEach(e -> System.out.print(e + ", "));
+        System.out.println("");
+        collection.forEach(System.out::print);
+
 
     }
 }
