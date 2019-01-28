@@ -88,6 +88,7 @@ public class MapInterface {
         System.out.println("map.computeIfAbsent(\"Third\", abscentComputer): " + map.computeIfAbsent("Third", abscentComputer));
         System.out.println("map.put(\"Seventh\", null): " + map.put("Seventh", null));
         System.out.println("map.computeIfAbsent(\"Seventh\", abscentComputer): " + map.computeIfAbsent("Seventh", abscentComputer));
+        System.out.println("map.computeIfAbsent(\"Seventh\", (k) -> null): " + map.computeIfAbsent("Seventh", (k) -> null));
         System.out.println("map.computeIfAbsent(\"Eighth\", (k) -> null): " + map.computeIfAbsent("Eighth", (k) -> null)); // ключ не добавится с null
         System.out.println(map);
     }
