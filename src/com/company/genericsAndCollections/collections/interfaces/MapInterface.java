@@ -59,6 +59,7 @@ public class MapInterface {
         System.out.println(" map.putIfAbsent(\"Tenth\", 100): " +  map.putIfAbsent("Tenth", 100));
         System.out.println(" map.putIfAbsent(\"Tenth\", 100): " +  map.putIfAbsent("Tenth", 10));
         System.out.println(" map.putIfAbsent(\"Eleventh\", null): " +  map.putIfAbsent("Eleventh", null));
+        System.out.println(" map.putIfAbsent(null, null): " +  map.putIfAbsent(null, null));
         System.out.println(map);
         System.out.println("");
         // Пример использования: V merge() - возвращает значение по ключу, которое осталось после изменений, либо новое значение
