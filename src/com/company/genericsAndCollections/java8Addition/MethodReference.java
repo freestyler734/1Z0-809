@@ -1,4 +1,4 @@
-package com.company.genericsAndCollections.collections.java8Addition;
+package com.company.genericsAndCollections.java8Addition;
 
 import com.company.genericsAndCollections.common.Duck;
 import com.company.genericsAndCollections.common.DuckHelper;
