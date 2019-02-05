@@ -1,4 +1,4 @@
-package com.company.functionalProgramming;
+package com.company.functionalProgramming.optional;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
