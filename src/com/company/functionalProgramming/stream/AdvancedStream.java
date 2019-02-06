@@ -22,5 +22,7 @@ public class AdvancedStream {
                 .filter(i -> i < 100)
                 .orElse(-1);
         System.out.println(result);
+
+        System.out.println(Optional.<String>empty().map(s -> s + "1").orElse("no"));
     }
 }

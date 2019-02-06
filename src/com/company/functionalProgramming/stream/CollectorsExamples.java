@@ -10,14 +10,14 @@ public class CollectorsExamples {
     public static void main(String[] args) {
         // Примеры использования готовых коллекторов
 
-        // joining
+        // joining, joining(CharSequence delimetr)
         Stream<String> stringStream = Stream.of("1", "2", "3", "4");
         String joiningResult = stringStream.collect(Collectors.joining(", "));
         stringStream = Stream.of("1", "2", "3", "4");
         joiningResult = stringStream.collect(Collectors.joining());
         System.out.println(joiningResult);
 
-        // avereging"Тип" - рез-т всегда Double
+        // avereging"Тип"(To"Тип"Function) - рез-т всегда Double
         stringStream = Stream.of("1", "2", "3", "4");
         Double avg1 = stringStream.collect(Collectors.averagingInt(Integer::parseInt)); // To"Тип"Function
         stringStream = Stream.of("1", "2", "3", "4");
@@ -84,12 +84,12 @@ public class CollectorsExamples {
         ));
         System.out.println(map3);
 
-        // groupingBy - группирует объекты по значению возвращаемой Function
+        // groupingBy - группирует объекты по значению возвращаемому Function
         // для элемента, возвращает случайную реализацию Map. По умолчанию, группирует в List
         // 1) groupingBy(Function)
-        stringStream = Stream.of("1", "1", "3", "4", "4", "6", "7", "9", "9");
-        Map<Integer, List<String>> map4 = stringStream.collect(Collectors.groupingBy(str -> Integer.parseInt(str)));
-        System.out.println(map4);
+        stringStream = Stream.of("11", "12", "13", "45", "42", "16", "27", "90", "99");
+        Map<Integer, List<String>> map4 = stringStream.collect(Collectors.groupingBy(str -> Integer.parseInt(String.valueOf(str.charAt(0)))));
+        System.out.println("map4: " + map4);
         // 2) groupingBy(Function, Collector) - Collector обрабатывает каждую группу
         // К примеру, можем в каждой группе можно посчитать сумму
         stringStream = Stream.of("1", "1", "3", "4", "4", "6", "7", "9", "9");
