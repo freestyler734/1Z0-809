@@ -28,6 +28,7 @@ public class StreamMethods {
         // Бесконечные
         Stream<Double> supplierStream = Stream.generate(Math::random);
         Stream<Integer> unOperatorStream = Stream.iterate(1, n -> n+2);
+        System.out.println("Stream.iterate(1, n -> n + 1): " + Stream.iterate(1, n -> n + 1));
 
 
 

@@ -22,4 +22,8 @@ public class Duck {
     public int getWeight() {
         return weight;
     }
+
+    public String method(int i, String s) {
+        return "age: " + (this.getAge() + i) + ", name: " + (this.getName() + s);
+    }
 }

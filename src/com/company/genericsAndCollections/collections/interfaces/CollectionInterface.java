@@ -8,6 +8,7 @@ public class CollectionInterface {
 
     public static void main(String[] args) {
         // Примеры использования и работы осн. методов интерфейса Collection
+        System.out.println("Основные методы:");
         Collection<String> collection = new HashSet<>();
         System.out.println("collection.size(): " + collection.size());
         System.out.println("collection.isEmpty(): " + collection.isEmpty());
@@ -29,7 +30,7 @@ public class CollectionInterface {
         System.out.println("collection.contains(\"Str1\"): " + collection.contains("Str1"));
         System.out.println("collection.contains(\"Str5\"): " + collection.contains("Str5"));
         System.out.println("");
-
+        System.out.println("----------------------------");
         // Реализации методов интерфеса построены так,
         // что если операция завершилась успешно, то возвращаем true, иначе false.
         // Никакие исключения не выбрасываются при неудачном завершении ситуаций(кроме JVM).
@@ -38,6 +39,7 @@ public class CollectionInterface {
 
 
         /// Функциональные методы ///
+        System.out.println("Функцинальные методы:");
         System.out.println(collection);
         System.out.println("collection.removeIf(s -> s.contains(\"4\")): " + collection.removeIf(s -> s.contains("4")));
         System.out.println(collection);

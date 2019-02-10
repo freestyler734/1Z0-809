@@ -15,6 +15,10 @@ interface DuckSupplier {
     Duck get(String name, int age, int weight);
 }
 
+interface MethodRefExample {
+    String apply(Duck d, int w, String s);
+}
+
 /*
     Примеры использования ссылок на метод
  */
@@ -55,10 +59,14 @@ public class MethodReference {
         System.out.println("------------------");
 
         // Метод экземпляра не известного до времени исполнения
-        Predicate<String> predicate3 = String::isEmpty; // экземпляр объекта неизвестен(работает с методами без параметров)
+        Predicate<String> predicate3 = String::isEmpty; // экземпляр объекта неизвестен(в кач-ве первого аргумента передается объект)
         Predicate<String> predicate4 = str -> str.isEmpty();
         System.out.println(predicate3.test("as"));
         System.out.println(predicate4.test("as"));
+        // пример использования методов с параметрами
+        // (у функц-го метода первый элемент д.б. типа объекта ссылаемого метода)
+        MethodRefExample methodReference = Duck::method;
+        System.out.println(methodReference.apply(new Duck("1", 1,1),7, " name" ));
         System.out.println("------------------");
 
         // Конструкторы
