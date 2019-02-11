@@ -1,6 +1,7 @@
 package com.company.datesStringsLocaliztion.time;
 
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 public class Common {
 
@@ -30,6 +31,27 @@ public class Common {
         // toEpochSenonds() - только для LocalDateTime и ZonedDateTime
         long secCount = localDateTime.toEpochSecond(ZoneOffset.of("+0"));
         long zonedSecCount = zonedDateTime.toEpochSecond();
+        System.out.println("localDateTime.toEpochSecond(ZoneOffset.of(\"+0\")): " + secCount);
+        System.out.println("zonedDateTime.toEpochSecond(): " + zonedSecCount);
+        System.out.println("");
 
+        // plus()/minus()
+        Period period = Period.ofWeeks(10);
+        System.out.println("period: " + period);
+        System.out.println("localDate.plus(period): " + localDate.plus(period));
+        System.out.println("localDateTime.minus(period): " + localDateTime.minus(period));
+        System.out.println("zonedDateTime.minus(period): " + zonedDateTime.minus(period));
+        System.out.println("");
+
+        // ChronoUnit beetween
+        zonedDateTime = ZonedDateTime.now();
+        localTime = LocalTime.of(20,18);
+        localDateTime = LocalDateTime.of(localDate.plusDays(78).plusYears(2), localTime.plusMinutes(200));
+        System.out.println("localDateTime: " + localDateTime);
+        System.out.println("zonedDateTime: " + zonedDateTime);
+        System.out.println("localTime: " + localTime);
+        System.out.println("ChronoUnit.DAYS.between(localDateTime, zonedDateTime): " + ChronoUnit.DAYS.between(localDateTime, zonedDateTime));
+        System.out.println("ChronoUnit.DAYS.between(localTime, zonedDateTime): " + ChronoUnit.HALF_DAYS.between(localTime, zonedDateTime)); // LocalTime не содержит дни
+        System.out.println("ChronoUnit.HOURS.between(localTime, zonedDateTime): " + ChronoUnit.HOURS.between(localTime, zonedDateTime));
     }
 }
