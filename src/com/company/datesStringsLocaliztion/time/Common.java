@@ -53,5 +53,35 @@ public class Common {
         System.out.println("ChronoUnit.DAYS.between(localDateTime, zonedDateTime): " + ChronoUnit.DAYS.between(localDateTime, zonedDateTime));
         System.out.println("ChronoUnit.DAYS.between(localTime, zonedDateTime): " + ChronoUnit.HALF_DAYS.between(localTime, zonedDateTime)); // LocalTime не содержит дни
         System.out.println("ChronoUnit.HOURS.between(localTime, zonedDateTime): " + ChronoUnit.HOURS.between(localTime, zonedDateTime));
+        System.out.println("----------------");
+
+        /// Переходы на зимнее/летнее время. ///
+        // Для примера возьмем Америку, где каждое первое воскресенье марта время сдвигают на час вперед,
+        // и каждое первое воскресенье ноябра на час назад.
+        // В обоих случаях смена происходит в 2 часа ночи, поэтому либо теряем час, либо Лишний час,
+        // при этом меняется часовой пояс, т.к. по GMT такой смены нет
+
+
+        // Перевод на час вперед
+        LocalDate date = LocalDate.of(2016, 3, 13);
+        LocalTime time = LocalTime.of(1, 30,0);
+        ZoneId zoneId = ZoneId.of("US/Eastern");
+        // за 30 минут до перевода
+        ZonedDateTime dateTime = ZonedDateTime.of(date, time, zoneId); // в это время был перевод
+        System.out.println("До перевода:    " + dateTime);
+        // в это время был перевод на час вперед и час отсутсвует
+        dateTime = dateTime.plusHours(1);
+        System.out.println("После перевода: " + dateTime);
+        System.out.println("");
+
+        // Перевод на час назад
+        date = LocalDate.of(2016, 11, 6);
+        time = LocalTime.of(1, 30,0);
+        // за 30 минут до перевода
+        dateTime = ZonedDateTime.of(date, time, zoneId); // в это время был перевод
+        System.out.println("До перевода:    " + dateTime);
+        // в это время был перевод на час назад и час прибавился
+        dateTime = dateTime.plusHours(1);
+        System.out.println("После перевода: " + dateTime);
     }
 }
