@@ -47,6 +47,14 @@ public class ResourceBundleExample {
         ResourceBundle classRb = ResourceBundle.getBundle("com.company.datesStringsLocaliztion.i18n_and_l10n.classBundle.Zoo", enLocale);
         System.out.println(classRb.getString("hello"));
 
+
+        //  Смотрим игнорируется ли файл, если язык совпадает а страну не передали
+        Locale.setDefault(new Locale("ru", "RU"));
+        ResourceBundle withoutCountry = ResourceBundle.getBundle("Zoo");
+        System.out.println(withoutCountry.getString("hello"));
+
+        // Классы и файлы  МОГУТ БЫТЬ в одной иерархии, если лежат в корне
+         System.out.println(withoutCountry.getString("bye"));
     }
 
     public static void printProperties(Locale locale) {
