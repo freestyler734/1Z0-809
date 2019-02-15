@@ -2,6 +2,7 @@ package com.company.datesStringsLocaliztion.time;
 
 import java.time.LocalTime;
 import java.time.Period;
+import java.util.Locale;
 
 public class TimeLocal {
 
@@ -22,6 +23,7 @@ public class TimeLocal {
         System.out.println("");
         System.out.println("time.plusNanos(10000): " + time.plusNanos(10000));
         System.out.println("time.minusNanos(10000000): " + time.minusNanos(10000000));
+        System.out.println("");
         System.out.println("------------");
 
         // Т.к. класс неизменяемый,
@@ -32,6 +34,15 @@ public class TimeLocal {
                                         .plusSeconds(20)
                                         .minusNanos(1);
         System.out.println("chainedTime: " + chainedTime);
+        System.out.println("");
+        System.out.println("------------");
 
+        // методы get"TimeUnit"()
+        time = LocalTime.of(12,4,5);
+        System.out.println(time);
+        System.out.println("time.getHour(): " + time.getHour());
+        System.out.println("time.getMinute(): " + time.getMinute());
+        System.out.println("time.getSecond(): " + time.getSecond());
+        System.out.println("time.getNano(): " + time.getNano());
     }
 }
