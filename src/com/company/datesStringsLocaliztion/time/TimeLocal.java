@@ -40,9 +40,9 @@ public class TimeLocal {
         // методы get"TimeUnit"()
         time = LocalTime.of(12,4,5);
         System.out.println(time);
-        System.out.println("time.getHour(): " + time.getHour());
-        System.out.println("time.getMinute(): " + time.getMinute());
-        System.out.println("time.getSecond(): " + time.getSecond());
-        System.out.println("time.getNano(): " + time.getNano());
+        System.out.println("time.getHour(): " + time.getHour()); // int
+        System.out.println("time.getMinute(): " + time.getMinute()); // int
+        System.out.println("time.getSecond(): " + time.getSecond()); // int
+        System.out.println("time.getNano(): " + time.getNano()); // int
     }
 }

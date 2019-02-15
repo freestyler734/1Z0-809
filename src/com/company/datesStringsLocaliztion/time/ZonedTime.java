@@ -21,20 +21,19 @@ public class ZonedTime {
 
         // методы get"TimeUnit"()
         // все get-методы Date
-        System.out.println("zonedDateTime.getYear(): " + zonedDateTime.getYear());
-        System.out.println("zonedDateTime.getMonth(): " + zonedDateTime.getMonth());
-        System.out.println("zonedDateTime.getMonthValue(): " + zonedDateTime.getMonthValue());
-        System.out.println("zonedDateTime.getDayOfYear(): " + zonedDateTime.getDayOfYear());
-        System.out.println("zonedDateTime.getDayOfMonth() + " + zonedDateTime.getDayOfMonth());
-        System.out.println("zonedDateTime.getDayOfWeek(): " + zonedDateTime.getDayOfWeek());
-        System.out.println("zonedDateTime.getDayOfWeek(): " + zonedDateTime.getDayOfWeek());
+        System.out.println("zonedDateTime.getYear(): " + zonedDateTime.getYear()); // int
+        System.out.println("zonedDateTime.getMonth(): " + zonedDateTime.getMonth()); // Month
+        System.out.println("zonedDateTime.getMonthValue(): " + zonedDateTime.getMonthValue()); // int
+        System.out.println("zonedDateTime.getDayOfYear(): " + zonedDateTime.getDayOfYear()); // int
+        System.out.println("zonedDateTime.getDayOfMonth() + " + zonedDateTime.getDayOfMonth()); // int
+        System.out.println("zonedDateTime.getDayOfWeek(): " + zonedDateTime.getDayOfWeek()); // DayOfWeek
         // все get-методы Time
-        System.out.println("zonedDateTime.getHour(): " + zonedDateTime.getHour());
-        System.out.println("zonedDateTime.getMinute(): " + zonedDateTime.getMinute());
-        System.out.println("zonedDateTime.getSecond(): " + zonedDateTime.getSecond());
-        System.out.println("zonedDateTime.getNano(): " + zonedDateTime.getNano());
+        System.out.println("zonedDateTime.getHour(): " + zonedDateTime.getHour()); // int
+        System.out.println("zonedDateTime.getMinute(): " + zonedDateTime.getMinute()); // int
+        System.out.println("zonedDateTime.getSecond(): " + zonedDateTime.getSecond()); // int
+        System.out.println("zonedDateTime.getNano(): " + zonedDateTime.getNano()); // int
         // доп. методы
-        System.out.println("zonedDateTime.getOffset(): " + zonedDateTime.getOffset());
-        System.out.println("zonedDateTime.getZone(): " + zonedDateTime.getZone());
+        System.out.println("zonedDateTime.getOffset(): " + zonedDateTime.getOffset()); // ZoneOffset
+        System.out.println("zonedDateTime.getZone(): " + zonedDateTime.getZone()); // ZoneId
     }
 }

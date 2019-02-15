@@ -35,11 +35,11 @@ public class DateLocal {
 
         // методы get"TimeUnit"()
         System.out.println(date);
-        System.out.println("date.getYear(): " + date.getYear());
-        System.out.println("date.getMonth(): " + date.getMonth());
-        System.out.println("date.getMonthValue(): " + date.getMonthValue());
-        System.out.println("date.getDayOfYear(): " + date.getDayOfYear());
-        System.out.println("date.getDayOfMonth() + " + date.getDayOfMonth());
-        System.out.println("date.getDayOfWeek(): " + date.getDayOfWeek());
+        System.out.println("date.getYear(): " + date.getYear()); // int
+        System.out.println("date.getMonth(): " + date.getMonth()); // Month
+        System.out.println("date.getMonthValue(): " + date.getMonthValue()); // int
+        System.out.println("date.getDayOfYear(): " + date.getDayOfYear()); // int
+        System.out.println("date.getDayOfMonth() + " + date.getDayOfMonth()); // int
+        System.out.println("date.getDayOfWeek(): " + date.getDayOfWeek()); // DayOfWeek
     }
 }
