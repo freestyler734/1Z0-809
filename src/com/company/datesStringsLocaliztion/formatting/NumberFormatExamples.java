@@ -37,7 +37,7 @@ public class NumberFormatExamples {
 
 
         /// format метод (число/объект в String) ///
-        double d = 1.7123234;
+        double d = 100000.7123234;
         // String format(...)
         System.out.println("defaultFormat: " + defaultFormat.format(d));
         System.out.println("localeFormat:  " + localeFormat.format(d));
@@ -69,10 +69,11 @@ public class NumberFormatExamples {
         /// ВЫБРАСЫВАЕТ ПРОВЕРЯЕМОЕ ИСКЛЮЧЕНИЕ  ParseException      ///
         try {
             // минус для чисел о.к.
-            // отбрасывается часть после "." , т.к. в России дробная часть после "," и "." в числах вообще не используется(т.е. это как незнакомый символ для этой locale). В таких случаях java парсит только первую часть строки(если это число, иначе Exception)
-            System.out.println("defaultFormat.parse(\"45.23\"): "+ defaultFormat.parse("-45.23"));
+            // отбрасывается часть после "." , т.к. в России дробная часть после "," и "." в числах вообще не используется(т.е. это как незнакомый символ для этой locale).
+            // В таких случаях java парсит только первую часть строки(если это число, иначе Exception)
+            System.out.println("defaultFormat.parse(\"45.23\"): "+ defaultFormat.parse("-45.23234"));
             // а Америке дробная часть "."
-            System.out.println("localeFormat.parse(\"45.23\"): "+ localeFormat.parse("-45.23"));
+            System.out.println("localeFormat.parse(\"45.23\"): "+ localeFormat.parse("-45.2343242"));
             // После незнакомой для данной locale части строки, парсинг не происходит
             System.out.println("defaultFormat.parse(\"45.23\"): "+ defaultFormat.parse("-45ыва23"));
             // Exception, т.к. парсится с начала, а там не число
@@ -82,16 +83,16 @@ public class NumberFormatExamples {
             // минус для валют ошибка
             // знак $ для российской валюты не походит
             // System.out.println(defaultCurrencyFormat.parse("$1.71"));
-            System.out.println(localeCurrencyFormat.parse("$1.71"));
+            System.out.println("localeCurrencyFormat.parse(\"$1.71\"): " + localeCurrencyFormat.parse("$1.71"));
             System.out.println("");
 
             // минус для процентов о.к. и знак "%" обязателен
-            System.out.println(defaultPercentFormat.parse("-120%"));
-            System.out.println(localePercentFormat.parse("-120%"));
+            System.out.println("defaultPercentFormat.parse(\"-120%\"): " + defaultPercentFormat.parse("-120%"));
+            System.out.println("localePercentFormat.parse(\"-120%\"):  " + localePercentFormat.parse("-120%"));
             System.out.println("");
 
             // минус для чисел о.к.
-            System.out.println(defaultIntegerFormat.parse("-123,3"));
+            System.out.println(defaultIntegerFormat.parse("-123,7"));
             // В Америке "," разделяют числа(как у нас отступами, но здесь это не работает)
             System.out.println(localeIntegerFormat.parse("-123,3"));
 
