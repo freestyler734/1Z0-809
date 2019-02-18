@@ -28,16 +28,32 @@ public class Exceptions {
 
 
         // try-with-resources
-        try(Scanner s = new Scanner(System.in);
-            InputStream in = new BufferedInputStream(System.in);
-            ) {
+//        try(Scanner s = new Scanner(System.in);
+//            InputStream in = new BufferedInputStream(System.in);
+//            ) {
+//
+//            s.nextInt();
+//
+//        } catch (Exception e) {
+//            //s.nextInt(); // недоступно. Ресурс был закрыт
+//        } finally {
+//            //s.nextInt(); // недоступно. Ресурс был закрыт
+//        }
 
-            s.nextInt();
-
-        } catch (Exception e) {
-            //s.nextInt(); // недоступно. Ресурс был закрыт
+        // SuppressedException
+        try (AutoClosableExample a1 = new AutoClosableExample("1");
+             AutoClosableExample a2 = new AutoClosableExample("2")) {
+            System.out.println("process");
+            throw new RuntimeException("RT Exception");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Exception's caught");
+        } catch (RuntimeException e) {
+            System.out.println("Caught: " + e.getMessage());
+            for (Throwable t: e.getSuppressed()) {
+                System.out.println("Suppressed: " + t.getMessage());
+            }
         } finally {
-            //s.nextInt(); // недоступно. Ресурс был закрыт
+            System.out.println("finally");
         }
 
     }
