@@ -1,12 +1,23 @@
 package com.company.exceptionsAndAssertions.exceptions;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.time.DateTimeException;
+import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Exceptions {
+
+    public static void method() throws SQLException, DateTimeParseException { }
+
+    public static void multiCatchMethod()  throws SQLException, DateTimeParseException {
+        try {
+            method();
+        } catch (SQLException | DateTimeParseException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
 
     public static void main(String[] args) {
         // ПРОВЕРЯЕМОГО исключения не м.б. в телк try
@@ -40,5 +51,10 @@ public class Exceptions {
             //s.nextInt(); // недоступно. Ресурс был закрыт
         }
 
+
+
+
     }
 }
+
+
