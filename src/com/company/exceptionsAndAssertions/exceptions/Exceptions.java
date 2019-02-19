@@ -19,6 +19,15 @@ public class Exceptions {
         }
     }
 
+    public static void rethrowMethod()  throws SQLException, DateTimeParseException {
+        try {
+            method();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
     public static void main(String[] args) {
         // ПРОВЕРЯЕМОГО исключения не м.б. в телк try
 //        try{
