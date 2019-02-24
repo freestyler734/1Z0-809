@@ -1,9 +1,11 @@
 package com.company.concurrency.executorService;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 public class SingleThreadExecutorExample {
+
     /// Пример рекомендуемого использовая SingleThreadExecutor ///
     public static void rightSingleThreadUsage() {
         ExecutorService singleThread = null;
@@ -26,6 +28,7 @@ public class SingleThreadExecutorExample {
         }
     }
 
+
     /// Пример, показывающий что после вызова остановки (shutdown),///
     /// пока выполняются переданные ранее задачи, ///
     /// если передать потоку новую задачу, то RejectedExecutionException ///
@@ -44,14 +47,200 @@ public class SingleThreadExecutorExample {
         System.out.println("end");
     }
 
+
+    /// Пример, показывающий что после вызова остановки и ///
+    /// прерывания исполняющихся задач (shutdownNow), ///
+    /// задачи дейчтвительно прерывают исполнение и метод возвращает список задач которые не начали свое исполнение ///
+    public static void shutdownNowExample1() {
+        ExecutorService singleThread = Executors.newSingleThreadExecutor();
+        System.out.println("begin");
+        singleThread.execute( () -> System.out.println("first task"));
+        singleThread.execute( () -> {
+            for (int i = 0; i < 200; i++) {
+                System.out.println("second task: " + i);
+            }
+        });
+        singleThread.execute( () -> {
+            for (int i = 0; i < 200; i++) {
+                System.out.println("third task: " + i);
+            }
+        });
+        singleThread.execute( () -> System.out.println("forth task"));
+        List<Runnable> runnables = singleThread.shutdownNow();
+        System.out.println("hadn't been started count: " + runnables.size());
+        System.out.println("end");
+    }
+
+
+    /// Пример использования метода Future<V> submit(Runnable r) ///
+    /// работает как execute, но возвращает объект Future, описывающий переданную задачу. ///
+    /// Обобщенный тип - рез-т возвращаемый задачай(Runnable - void, Callable - возвращает), ///
+    /// поэтому для Runnable - null ///
+    public static void submitExample1() {
+        ExecutorService service = null;
+        try {
+            service = Executors.newSingleThreadExecutor();
+            System.out.println("begin");
+            Future result = service.submit( () -> {
+               for (int i = 0; i < 500; i++) {
+                   System.out.println("task: " + i);
+               }
+            });
+
+            //System.out.println(result.cancel(false));
+            System.out.println(result.isDone());
+            System.out.println(result.isCancelled());
+
+            // ! МЕТОДЫ GET У FUTURE, ОСТАНАВЛИВАЮТ ГЛАВНЫЙ ПОТОК, ДОЖИДАЯСЬ ЗАВЕРШЕНИЯ ЗАДАЧИ
+            //получение результата, ожидание 1 секунду, если за время результата не дожались, то TimeoutException
+            //System.out.println(result.get(1, TimeUnit.NANOSECONDS));
+            System.out.println(result.get());  // перегрузка без таймаута
+            System.out.println("end");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+//        } catch (TimeoutException e) {
+//            e.printStackTrace();
+        } finally {
+            if (service != null) service.shutdown();
+        }
+    }
+
+
+    /// Пример использования метода Future<V> submit(Callable c) ///
+    public static void submitExample2() {
+        ExecutorService service = null;
+        try {
+            service = Executors.newSingleThreadExecutor();
+            Future result = service.submit( () -> 31 + 10 );
+
+            System.out.println(result.get());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            if (service != null) service.shutdown();
+        }
+    }
+
+
+    /// Пример использования <T> List<Future<T>> invokeAll(Collection<Callable<T>>)
+    /// метод ПОСЛЕДОВАТЕЛЬНО исполняет задачи из переданной коллекции, и возврвщвет List с Future задач в поредке переданной коллекции,
+    /// при этом метод работает СИНХРОННО, т.е. пока результат не будет готов для всех задач(м.б. отмена или исключение),
+    /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
+    public static void invokeAllExample1() {
+        ExecutorService service = null;
+        try {
+            service = Executors.newSingleThreadExecutor();
+
+            List<Callable<String>> callables = new ArrayList<>();
+            for (int i = 1; i < 4; i++ ) {
+                int finalI = i;
+                callables.add( () -> {
+                    String res = "task " + finalI;
+                    for (int j = 0; j < 100; j ++) {
+                        System.out.println(res + ": " + j);
+                    }
+                    return res;
+                } );
+            }
+            System.out.println("begin");
+            //List<Future<String>> futures = service.invokeAll(callables);
+            List<Future<String>> futures = service.invokeAll(callables, 1, TimeUnit.NANOSECONDS);
+            for (int i = 0 ; i < futures.size(); i++) {
+                System.out.println(futures.get(i).isDone());
+            }
+            System.out.println("end");
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } finally {
+            if (service != null) service.shutdown();
+        }
+    }
+
+
+    /// Пример использования <T> T invokeAny(Collection<Callable<T>>)
+    /// метод ПОСЛЕДОВАТЕЛЬНО исполняет задачи из переданной коллекции, и возврвщвет результат Callable одной завершившейся задач.
+    /// Чаще всего это первая переданная задача, но это не гаратированно
+    /// Метод работает СИНХРОННО, т.е. пока результат не будет готов одной задачи (м.б. отмена или исключение),
+    /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
+    public static void invokeAnyExample() {
+        ExecutorService service = null;
+        try {
+            service = Executors.newSingleThreadExecutor();
+
+            List<Callable<String>> callables = new ArrayList<>();
+            for (int i = 1; i <= 3; i++ ) {
+                int finalI = i;
+                callables.add( () -> {
+                    String res = "task " + finalI;
+                    for (int j = 1; j <= 10; j ++) {
+                        System.out.println(res + ": " + j);
+                    }
+
+                    return res;
+                } );
+            }
+            System.out.println("begin");
+            String anyResult = service.invokeAny(callables);
+
+            System.out.println("anyResult: " + anyResult);
+
+            System.out.println("end");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } finally {
+            if (service != null) service.shutdown();
+        }
+    }
+
+
     public static void main(String[] args) {
 
         /// Пример рекомендуемого использовая SingleThreadExecutor ///
-        rightSingleThreadUsage();
+        // rightSingleThreadUsage();
+
 
         /// Пример, показывающий что после вызова остановки (shutdown),///
         /// пока выполняются переданные ранее задачи, ///
         /// если передать потоку новую задачу, то RejectedExecutionException ///
-        shutdownExample1();
+        // shutdownExample1();
+
+
+        /// Пример, показывающий что после вызова остановки и ///
+        /// прерывания исполняющихся задач (shutdownNow), ///
+        /// задачи дейчтвительно прерывают исполнение и метод возвращает список задач которые не начали свое исполнение ///
+        // shutdownNowExample1();
+
+
+        /// Пример использования метода Future<V> submit(Runnable r) ///
+        /// работает как execute, но возвращает объект Future, описывающий переданную задачу. ///
+        /// Обобщенный тип - рез-т возвращаемый задачай(Runnable - void, Callable - возвращает), ///
+        /// поэтому для Runnable - null ///
+        // submitExample1();
+
+
+        /// Пример использования метода Future<V> submit(Callable c) ///
+        // submitExample2();
+
+
+        /// Пример использования <T> List<Future<T>> invokeAll(Collection<Callable<T>>)
+        /// метод ПОСЛЕДОВАТЕЛЬНО исполняет задачи из переданной коллекции, и возврвщвет List с Future задач в поредке переданной коллекции,
+        /// при этом метод работает СИНХРОННО, т.е. пока результат не будет готов для всех задач(м.б. отмена или исключение),
+        /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
+         invokeAllExample1();
+
+
+        /// Пример использования <T> T invokeAny(Collection<Callable<T>>)
+        /// метод ПОСЛЕДОВАТЕЛЬНО исполняет задачи из переданной коллекции, и возврвщвет результат Callable одной завершившейся задач.
+        /// Чаще всего это первая переданная задача, но это не гаратированно
+        /// Метод работает СИНХРОННО, т.е. пока результат не будет готов одной задачи (м.б. отмена или исключение),
+        /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
+        // invokeAnyExample();
     }
 }
