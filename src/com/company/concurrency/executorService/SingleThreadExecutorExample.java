@@ -200,6 +200,48 @@ public class SingleThreadExecutorExample {
     }
 
 
+    // Пример использования метода awaitTermination(long time, TimeUnit unit).
+    // Где time - МАКСИМАЛЬНОЕ время ожидания завершения потока
+    // Метод ожидает завершение исполнения потока => его можно вызывать только полсе shutdown()/shutdownNow()
+    // Если поток завершился раньше указанного времени, то ожидание вызывающим потоком снимается.
+    // Если времени не хватило, то вызывающий поток продолжает свое исполнение
+    public static void awaitTerminatoionExample1() {
+        ExecutorService service = null;
+        System.out.println("begin");
+        try {
+            service = Executors.newSingleThreadExecutor();
+            System.out.println("before submitting task");
+            service.submit( () -> {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println("task: " + i);
+                }
+            });
+            System.out.println("after submitting task");
+        } finally {
+            if (service != null) service.shutdown();
+        }
+
+        if (service != null) {
+            try {
+                // Ожидание завершения потока, указанное кол-во времени
+                // Времени ожидания может нехватить, тогда потоки просто продолжают свою работу.
+                // Если потоки завершат работу раньше, то вызывающий поток прекращает ожидание
+                service.awaitTermination(4, TimeUnit.SECONDS);
+
+                if (service.isTerminated()) {
+                    System.out.println("Task has been completed");
+                } else {
+                    System.out.println("Task is still Running");
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+        System.out.println("end");
+    }
+
+
     public static void main(String[] args) {
 
         /// Пример рекомендуемого использовая SingleThreadExecutor ///
@@ -233,7 +275,7 @@ public class SingleThreadExecutorExample {
         /// метод ПОСЛЕДОВАТЕЛЬНО исполняет задачи из переданной коллекции, и возврвщвет List с Future задач в поредке переданной коллекции,
         /// при этом метод работает СИНХРОННО, т.е. пока результат не будет готов для всех задач(м.б. отмена или исключение),
         /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
-         invokeAllExample1();
+        // invokeAllExample1();
 
 
         /// Пример использования <T> T invokeAny(Collection<Callable<T>>)
@@ -242,5 +284,13 @@ public class SingleThreadExecutorExample {
         /// Метод работает СИНХРОННО, т.е. пока результат не будет готов одной задачи (м.б. отмена или исключение),
         /// управление не переходит в главный поток. Ожидание м.б. бесконечно, поэтому есть версия метода, где указывается время ожидания
         // invokeAnyExample();
+
+
+        // Пример использования метода awaitTermination(long time, TimeUnit unit).
+        // Где time - МАКСИМАЛЬНОЕ время ожидания завершения потока
+        // Метод ожидает завершение исполнения потока => его можно вызывать только полсе shutdown()/shutdownNow()
+        // Если поток завершился раньше указанного времени, то ожидание вызывающим потоком снимается.
+        // Если времени не хватило, то вызывающий поток продолжает свое исполнение
+        awaitTerminatoionExample1();
     }
 }
