@@ -212,7 +212,8 @@ public class SingleThreadExecutorExample {
             service = Executors.newSingleThreadExecutor();
             System.out.println("before submitting task");
             service.submit( () -> {
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 10000; i++) {
+
                     System.out.println("task: " + i);
                 }
             });
@@ -223,10 +224,14 @@ public class SingleThreadExecutorExample {
 
         if (service != null) {
             try {
+
+               // Thread.sleep(2000);
+
                 // Ожидание завершения потока, указанное кол-во времени
                 // Времени ожидания может нехватить, тогда потоки просто продолжают свою работу.
                 // Если потоки завершат работу раньше, то вызывающий поток прекращает ожидание
-                service.awaitTermination(4, TimeUnit.SECONDS);
+                boolean awaitRes = service.awaitTermination(1, TimeUnit.NANOSECONDS);
+                System.out.println("awaitRes: " + awaitRes);
 
                 if (service.isTerminated()) {
                     System.out.println("Task has been completed");
