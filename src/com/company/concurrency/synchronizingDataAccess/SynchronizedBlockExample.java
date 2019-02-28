@@ -12,9 +12,19 @@ public class SynchronizedBlockExample {
         private static int staticCount = 0;
 
         // равносильно добавлению в сигнатуру метода спецификатора synchronized
-        private void incrementAndReport() {
+        private void incrementAndReport() throws InterruptedException {
             synchronized (this) {
                 System.out.print(++count + " ");
+                Thread.sleep(5000);
+            }
+        }
+
+        private synchronized void print() {
+            System.out.println("hi");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
@@ -31,8 +41,15 @@ public class SynchronizedBlockExample {
             try {
                 service = Executors.newFixedThreadPool(50);
                 for (int i = 0; i < 10; i++) {
-                    service.submit( () -> incrementAndReport());
+                    service.submit(() -> {
+                        try {
+                            incrementAndReport();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
+                service.submit(() -> print());
             } finally {
                 if (service != null) service.shutdown();
             }
