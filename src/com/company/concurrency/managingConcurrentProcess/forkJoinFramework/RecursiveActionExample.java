@@ -24,7 +24,7 @@ public class RecursiveActionExample {
             // предполагается, что в рамках одной задачи можно превести не больше 3-х взвешиваний животных
             if (end - start <= 3) {
                 for (int i = start; i < end; i++){
-                    weights[i] = new Random().nextDouble();
+                    weights[i] = new Random().nextInt(100);
                     System.out.println("Animal weighted: " + i);
                 }
             } else {

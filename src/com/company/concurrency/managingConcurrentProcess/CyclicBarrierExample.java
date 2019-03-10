@@ -19,7 +19,8 @@ public class CyclicBarrierExample {
     private void performTask(CyclicBarrier c) {
         try {
             removeAnimals();
-            c.await();
+            int threadNumber = c.await();
+            System.out.println("thread number: " + threadNumber);
             cleanPen();
             c.await();
             addAnimals();

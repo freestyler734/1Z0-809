@@ -58,6 +58,9 @@ public class ParallelReduction {
         System.out.println("Нарушение правила 3 для reduce в паралелльном стриме: " + result4);
 
         System.out.println("\n----------------------------------\n");
+
+
+
         /// collect() - меотод в паралелльном окружении ///
         // Пример вызова
         Stream<Character> parallelStream7 = Arrays.asList('H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!').parallelStream();
