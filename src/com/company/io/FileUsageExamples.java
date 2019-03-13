@@ -15,13 +15,15 @@ public class FileUsageExamples {
         /// Класс java.io.File используется для описания свойств файла или каталога ///
 
         // В качестве конструктора можно передать либо относительный путь либо абсолютный
-        File filesDirectory = new File("C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files");
+        //File filesDirectory = new File("C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files");
+        File filesDirectory = new File("/Users/ivan/Documents/1Z0-809/files");
         System.out.println("fileDirectory.exists(): " + filesDirectory.exists());
 
         // Либо можно передать два параметра parent и child
         // где parent м.б. либо File, либо String
         // Если parent - null, то он пропускается
-        File zooFile1 = new File("C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files", "zoo.txt");
+        //File zooFile1 = new File("C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files", "zoo.txt");
+        File zooFile1 = new File("/Users/ivan/Documents/1Z0-809/files", "zoo.txt");
         File zooFile2 = new File(filesDirectory, "zoo.txt");
         System.out.println("zooFile1.exists(): " + zooFile1.exists());
         System.out.println("zooFile2.exists(): " + zooFile2.exists());
@@ -63,7 +65,7 @@ public class FileUsageExamples {
         System.out.println("zooFile1.listFiles(): " + zooFile1.listFiles());
         System.out.println("-");
         // mkdir() - создает каталог по заданному пути.
-        // true - если успешно, каталога по пути не существует, и существуют все указанные в пути родительскае каталоги
+        // true - если успешно, каталога по пути не существует, и существуют все указанные в пути родительские каталоги
         // иначе false
         System.out.println("new File(filesDirectory, \"test\").mkdir(): " + new File(filesDirectory, "test").mkdir());
         System.out.println("new File(filesDirectory, \"test1/test2\").mkdir(): " + new File(filesDirectory, "test1/test2").mkdir());

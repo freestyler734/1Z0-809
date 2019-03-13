@@ -32,5 +32,7 @@ public class ParellelStreamCreation {
         Stream<Integer> parallelStream2 = Arrays.asList(1,2,3,4,5).parallelStream();
         System.out.println("parallelStream2.isParallel(): " + parallelStream2.isParallel());
 
+
+
     }
 }
