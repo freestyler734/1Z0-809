@@ -23,7 +23,7 @@ public class ObjectIOStream {
             stream.writeObject(tiger);
             stream.flush();
         } catch (IOException e) {
-            e.printStackTrace();Reader
+            e.printStackTrace();
         }
 
         // Десериализация объекта
