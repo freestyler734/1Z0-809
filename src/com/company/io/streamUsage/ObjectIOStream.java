@@ -17,12 +17,13 @@ public class ObjectIOStream {
         System.out.println(tiger);
 
         // Сериализация объекта tiger
-        File tigersFile = new File("C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files\\objectIOFiles\\Tigers");
+        File tigersFile = new File(/*"C:\\Users\\User\\Desktop\\личное\\1Z0-809\\1Z0-809\\files\\objectIOFiles\\Tigers"*/
+        "/Users/ivan/Documents/1Z0-809/files/objectIOFiles/Tigers");
         try(ObjectOutputStream stream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(tigersFile)))) {
             stream.writeObject(tiger);
             stream.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();Reader
         }
 
         // Десериализация объекта
