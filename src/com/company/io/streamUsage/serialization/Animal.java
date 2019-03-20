@@ -2,7 +2,7 @@ package com.company.io.streamUsage.serialization;
 
 import java.io.Serializable;
 
-public class Animal implements Serializable {
+public class Animal  {
 
     protected String name;
     protected int age;
