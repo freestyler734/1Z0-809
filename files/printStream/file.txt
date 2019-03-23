@@ -1,3 +1,4 @@
 true
 test
 My test 1, 1,000000
+Appendable method test
